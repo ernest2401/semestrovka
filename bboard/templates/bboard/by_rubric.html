@@ -1,0 +1,18 @@
+{% extends "bboard/layout/basic.html" %}
+{% load static %}
+
+{% block title %}{{ current_rubric.name}}{% endblock %}
+
+{% block content %}
+<h2>Рубрика :{{ current_rubric.name }}</h>
+  {% for ad in ads %}
+      <div class="item">
+        <a href="{% url 'ad_detail' pk=ad.pk %}">
+          <img src="{% if ad.image %}{{ ad.image.url }}
+          {% else %}{% static "img/no_image.png" %}{% endif %}" width="200" height='200'>
+        </a>
+        <a href="{% url 'ad_detail' pk=ad.pk %}">{{ ad.title }}</a><br>
+        {{ ad.price }}
+      </div>
+  {% endfor %}
+{% endblock %}

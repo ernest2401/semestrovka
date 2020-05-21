@@ -1,0 +1,31 @@
+{% extends "bboard/layout/basic.html" %}
+
+{% block title %}Отзыв о работе сайта{% endblock %}
+{% block content %}
+<body class="container">
+    <form method="POST" action="create/">
+        {% csrf_token %}
+        <p>
+            <label>Введите отзыв</label><br>
+            <input type="text" name="body" />
+        </p>
+        <p>
+            <label>Введите ваш номер телефона,чтобы мы могли с Вами связаться</label><br>
+            <input type="number" name="number" />
+        </p>
+        <input type="submit" value="Сохранить" >
+    </form>
+    {% if wish.count > 0 %}
+    <h2>Оставленные пожелания по работе сайта</h2>
+    <table>
+      <p>
+        {% for enum in wish %}
+          <p><tr><th>Логин пользователя : {{ enum.author }}</th></tr>
+            <tr><th>Отзыв о работе сайта </th><td>{{ enum.body }}</td></tr>
+            <th>Номер телефона для связи</th><td>{{ enum.number }}</td></p>
+        {% endfor %}
+      </p>
+    </table>
+    {% endif %}
+</body>
+{% endblock %}

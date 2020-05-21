@@ -1,0 +1,11 @@
+{% extends "bboard/layout/basic.html" %}
+
+{% block title %}Добавление объявления{% endblock %}
+{% block content %}
+      <h1>Добавление объявления</h>
+      <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <input type="submit" value="Добавить">
+      </form>
+{% endblock %}

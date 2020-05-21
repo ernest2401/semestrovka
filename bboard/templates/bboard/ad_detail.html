@@ -1,0 +1,36 @@
+{% extends "bboard/layout/basic.html" %}
+
+{% block title %}{{ ad.title }}{% endblock %}
+{% block content %}
+  <h1>Название:{{ ad.title }}</h1>
+  {% if ad.image %}
+      <img width='200' height='220' src="{{ ad.image.url }}">
+  {% endif %}
+  <p><font size="6" face="Arial">Описание:{{ ad.content }}</font>.</p>
+  <p class="date">Объявление опубликовано {{ ad.publish }} пользователем: {{ ad.author }}</p>
+  <p>
+    <a href="{% url "ad_share" pk=ad.pk %}">Share this post</a>
+  </p>
+  {% for comment in comments %}
+    <div class="comment">
+      <p class="info">
+        Комментарий {{ forloop.counter }} пользователя: {{ comment.author }}
+        Опубликован : {{ comment.created }}
+      </p>
+      {{ comment.body|linebreaks }}
+    </div>
+    {% empty %}
+      <p>Пока никто из пользователей не оставил комментария.</p>
+    {% endfor %}
+    {% if new_comment %}
+      <h2>Ваш комментарий был добавлен.</h2>
+    {% else %}
+      <h2>Добавить комментарий об этом товаре</h2>
+      <form action="." method="post">
+        {{ comment_form.as_p }}
+        {% csrf_token %}
+        <p><input type="submit" value="Добавить комментарий"></p>
+        </form>
+      {% endif %}
+  {{ ad.body|linebreaks }}
+{% endblock %}
