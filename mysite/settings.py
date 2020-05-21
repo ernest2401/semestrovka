@@ -32,7 +32,6 @@ INSTALLED_APPS = [
     'bboard.apps.BboardConfig',
     'accounts',
     'registration',
-    'rest_framework_swagger',
 ]
 
 MIDDLEWARE = [
