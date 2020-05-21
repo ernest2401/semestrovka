@@ -32,7 +32,6 @@ INSTALLED_APPS = [
     'bboard.apps.BboardConfig',
     'accounts',
     'registration',
-    'crispy_forms',
     'rest_framework_swagger',
 ]
 
